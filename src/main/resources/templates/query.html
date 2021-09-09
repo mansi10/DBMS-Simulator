@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Data Project Group 3</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Query</h1>
+<form action="#" th:action="@{/query}" th:object="${query}" method="post">
+    <div>Logged In user name: <big th:text="${query.userName}" >${query.userName}</big></div>
+    <p>Query: <textarea rows="20" cols="80" type="textArea" th:field="*{userQuery}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" />
+    <pre>   </pre><a th:href="@{/logout}">Logout</a></pre>
+    <div th:if="${query.isError()}">
+        <div><p>Message: <small style="color: red" th:text="${query.appResponse}" >${query.appResponse}</small></p></div>
+    </div>
+    <div th:if="${query.isResultFlag()}">
+        <p>Result: </p>
+        <div th:each="result : ${query.resultList}">
+            <div><p><pre><big th:text="${result}" >${result}</big></pre></p></div>
+        </div>
+    </div>
+</form>
+</body>
+</html>
